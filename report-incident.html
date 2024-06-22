@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report-Incident - Emergency Response Coordination Platform</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 36px;
+        }
+        .navbar {
+            overflow: hidden;
+            background-color: #333;
+        }
+        .navbar a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .navbar a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        .content {
+            padding: 20px;
+        }
+        .content section {
+            margin-bottom: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .content section h2 {
+            margin-top: 0;
+        }
+        .location-select {
+            margin-bottom: 20px;
+        }
+        .location-select label {
+            font-weight: bold;
+        }
+        .emergency-services {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .send-message-btn {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .send-message-btn:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script>
+        const data = {
+            kompally: {
+                hospitals: [
+                    { name: "Kompally Hospital 1", number: "123-456-7890" },
+                    { name: "Kompally Hospital 2", number: "123-456-7891" }
+                ],
+                police: [
+                    { name: "Kompally Police Station 1", number: "123-456-7892" },
+                    { name: "Kompally Police Station 2", number: "123-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Kompally Fire Engine 1", number: "123-456-7894" },
+                    { name: "Kompally Fire Engine 2", number: "123-456-7895" }
+                ]
+            },
+            medchal: {
+                hospitals: [
+                    { name: "Medchal Hospital 1", number: "223-456-7890" },
+                    { name: "Medchal Hospital 2", number: "223-456-7891" }
+                ],
+                police: [
+                    { name: "Medchal Police Station 1", number: "223-456-7892" },
+                    { name: "Medchal Police Station 2", number: "223-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Medchal Fire Engine 1", number: "223-456-7894" },
+                    { name: "Medchal Fire Engine 2", number: "223-456-7895" }
+                ]
+            },
+            suchitra: {
+                hospitals: [
+                    { name: "Suchitra Hospital 1", number: "323-456-7890" },
+                    { name: "Suchitra Hospital 2", number: "323-456-7891" }
+                ],
+                police: [
+                    { name: "Suchitra Police Station 1", number: "323-456-7892" },
+                    { name: "Suchitra Police Station 2", number: "323-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Suchitra Fire Engine 1", number: "323-456-7894" },
+                    { name: "Suchitra Fire Engine 2", number: "323-456-7895" }
+                ]
+            }
+        };
+
+        function updateContent(location) {
+            const hospitalsSection = document.getElementById('hospitals');
+            const policeSection = document.getElementById('police');
+            const fireEnginesSection = document.getElementById('fire-engines');
+
+            hospitalsSection.innerHTML = data[location].hospitals.map(service => `
+                <div class="emergency-services">
+                    <p>${service.name} - ${service.number}</p>
+                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                </div>
+            `).join('');
+
+            policeSection.innerHTML = data[location].police.map(service => `
+                <div class="emergency-services">
+                    <p>${service.name} - ${service.number}</p>
+                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                </div>
+            `).join('');
+
+            fireEnginesSection.innerHTML = data[location].fireEngines.map(service => `
+                <div class="emergency-services">
+                    <p>${service.name} - ${service.number}</p>
+                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                </div>
+            `).join('');
+        }
+
+        function sendMessage() {
+            const popup = document.createElement('div');
+            popup.style.position = 'fixed';
+            popup.style.left = '50%';
+            popup.style.top = '50%';
+            popup.style.transform = 'translate(-50%, -50%)';
+            popup.style.padding = '30px';
+            popup.style.backgroundColor = '#fff';
+            popup.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+            popup.innerHTML = `
+                <h2>Alert Message Sent</h2>
+                <button onclick="this.parentElement.remove()">OK</button>
+            `;
+            document.body.appendChild(popup);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('locations').addEventListener('change', (e) => {
+                updateContent(e.target.value);
+            });
+            updateContent(document.getElementById('locations').value); // Initialize with default location
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <h1>Emergency Response Coordination Platform - Report-Incident</h1>
+</div>
+
+<div class="navbar">
+    <a href="home.html">Home</a>
+    <a href="report-incident.html">Report-Incident</a>
+    <a href="emergency-alerts.html">Emergency-Alerts</a>
+    <a href="needs.html">Needs</a>
+    <a href="issues.html">Issues</a>
+    <a href="about.html">About Us</a>
+</div>
+
+<div class="content">
+    <div class="location-select">
+        <label for="locations">Select Location:</label>
+        <select id="locations" name="locations">
+            <option value="kompally">Kompally</option>
+            <option value="medchal">Medchal</option>
+            <option value="suchitra">Suchitra</option>
+        </select>
+    </div>
+
+    <section>
+        <h2>Hospitals</h2>
+        <div id="hospitals"></div>
+    </section>
+
+    <section>
+        <h2>Police Stations</h2>
+        <div id="police"></div>
+    </section>
+
+    <section>
+        <h2>Fire Engines</h2>
+        <div id="fire-engines"></div>
+    </section>
+</div>
+
+</body>
+</html>
