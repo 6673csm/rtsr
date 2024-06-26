@@ -52,6 +52,29 @@
         .content section h2 {
             margin-top: 0;
         }
+        .alert-button {
+            background-color: #ff0000;
+            color: white;
+            padding: 15px 30px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .alert-button:hover {
+            background-color: #cc0000;
+        }
+        .alert-message {
+            display: none;
+            font-size: 24px;
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +91,60 @@
     <a href="issues.html">Issues</a>
     <a href="about.html">About Us</a>
 </div>
+
+<div class="content">
+    <section>
+        <h2>Emergency Alert</h2>
+        <button class="alert-button" onclick="sendEmergencyAlert()">Send Emergency Alert</button>
+        <div id="alertMessage" class="alert-message">EMERGENCY ALERT IS SENT</div>
+    </section>
+</div>
+
+<script>
+function sendEmergencyAlert() {
+    let emergencyType = prompt("Please enter the type of emergency:");
+    if (emergencyType) {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                let latitude = position.coords.latitude;
+                let longitude = position.coords.longitude;
+                alert("Emergency: " + emergencyType + "\nLatitude: " + latitude + "\nLongitude: " + longitude);
+                
+                // Show the alert message
+                document.getElementById('alertMessage').style.display = 'block';
+                
+                // Here you would send the information to the police and hospitals
+                // This can be done using an AJAX request to your server-side script
+                // Example using fetch API (replace 'your-server-endpoint' with your actual endpoint):
+                fetch('http://localhost:3000/send-alert', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        emergencyType: emergencyType,
+                        latitude: latitude,
+                        longitude: longitude
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log('Success:', data);
+                })
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+            }, function(error) {
+                alert('Error occurred. Error code: ' + error.code);
+            });
+        } else {
+            alert('Geolocation is not supported by this browser.');
+        }
+    } else {
+        alert('Emergency type is required.');
+    }
+}
+</script>
 
 </body>
 </html>
