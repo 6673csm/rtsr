@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,6 +12,7 @@
             padding: 0;
             background-color: #f4f4f4;
         }
+
         .header {
             background-color: #4CAF50;
             color: white;
@@ -18,14 +20,17 @@
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .header h1 {
             margin: 0;
             font-size: 36px;
         }
+
         .navbar {
             overflow: hidden;
             background-color: #333;
         }
+
         .navbar a {
             float: left;
             display: block;
@@ -35,13 +40,16 @@
             text-decoration: none;
             transition: background-color 0.3s;
         }
+
         .navbar a:hover {
             background-color: #ddd;
             color: black;
         }
+
         .content {
             padding: 20px;
         }
+
         .content section {
             margin-bottom: 20px;
             background-color: white;
@@ -49,21 +57,26 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+
         .content section h2 {
             margin-top: 0;
         }
+
         .location-select {
             margin-bottom: 20px;
         }
+
         .location-select label {
             font-weight: bold;
         }
+
         .emergency-services {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 10px;
         }
+
         .send-message-btn {
             background-color: #4CAF50;
             color: white;
@@ -73,8 +86,17 @@
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .send-message-btn:hover {
             background-color: #45a049;
+        }
+
+        .message-input {
+            margin-left: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            min-width: 200px;
         }
     </style>
     <script>
@@ -120,7 +142,63 @@
                     { name: "Suchitra Fire Engine 1", number: "323-456-7894" },
                     { name: "Suchitra Fire Engine 2", number: "323-456-7895" }
                 ]
-            }
+            },
+            kukatpally: {
+                hospitals: [
+                    { name: "Kukatpally Hospital 1", number: "123-456-7890" },
+                    { name: "Kukatpally Hospital 2", number: "123-456-7891" }
+                ],
+                police: [
+                    { name: "Kukatpally Police Station 1", number: "123-456-7892" },
+                    { name: "Kukatpally Police Station 2", number: "123-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Kukatpally Fire Engine 1", number: "123-456-7894" },
+                    { name: "Kukatpally Fire Engine 2", number: "123-456-7895" }
+                ]
+            },
+            secunderabad: {
+                hospitals: [
+                    { name: "Secunderabad Hospital 1", number: "123-456-7890" },
+                    { name: "Secunderabad Hospital 2", number: "123-456-7891" }
+                ],
+                police: [
+                    { name: "Secunderabad Police Station 1", number: "123-456-7892" },
+                    { name: "Secunderabad Police Station 2", number: "123-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Secunderabad Fire Engine 1", number: "123-456-7894" },
+                    { name: "Secunderabad Fire Engine 2", number: "123-456-7895" }
+                ]
+            },
+            pragathinagar: {
+                hospitals: [
+                    { name: "Pragathinagar Hospital 1", number: "123-456-7890" },
+                    { name: "Secunderabad Hospital 2", number: "123-456-7891" }
+                ],
+                police: [
+                    { name: "Secunderabad Police Station 1", number: "123-456-7892" },
+                    { name: "Secunderabad Police Station 2", number: "123-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Secunderabad Fire Engine 1", number: "123-456-7894" },
+                    { name: "Secunderabad Fire Engine 2", number: "123-456-7895" }
+                ]
+            },
+            uppal: {
+                hospitals: [
+                    { name: "Uppal Hospital 1", number: "123-456-7890" },
+                    { name: "uppal Hospital 2", number: "123-456-7891" }
+                ],
+                police: [
+                    { name: "Uppal Police Station 1", number: "123-456-7892" },
+                    { name: "Secunderabad Police Station 2", number: "123-456-7893" }
+                ],
+                fireEngines: [
+                    { name: "Secunderabad Fire Engine 1", number: "123-456-7894" },
+                    { name: "Secunderabad Fire Engine 2", number: "123-456-7895" }
+                ]
+            },
         };
 
         function updateContent(location) {
@@ -131,39 +209,46 @@
             hospitalsSection.innerHTML = data[location].hospitals.map(service => `
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
-                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                    <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
+                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
 
             policeSection.innerHTML = data[location].police.map(service => `
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
-                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                    <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
+                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
 
             fireEnginesSection.innerHTML = data[location].fireEngines.map(service => `
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
-                    <button class="send-message-btn" onclick="sendMessage()">Send Message</button>
+                    <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
+                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
         }
 
-        function sendMessage() {
-            const popup = document.createElement('div');
-            popup.style.position = 'fixed';
-            popup.style.left = '50%';
-            popup.style.top = '50%';
-            popup.style.transform = 'translate(-50%, -50%)';
-            popup.style.padding = '30px';
-            popup.style.backgroundColor = '#fff';
-            popup.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
-            popup.innerHTML = `
-                <h2>Alert Message Sent</h2>
-                <button onclick="this.parentElement.remove()">OK</button>
-            `;
-            document.body.appendChild(popup);
+        function sendMessage(serviceName) {
+            const message = prompt(`Enter issue for ${serviceName}:`);
+            if (message) {
+                const popup = document.createElement('div');
+                popup.style.position = 'fixed';
+                popup.style.left = '50%';
+                popup.style.top = '50%';
+                popup.style.transform = 'translate(-50%, -50%)';
+                popup.style.padding = '30px';
+                popup.style.backgroundColor = '#fff';
+                popup.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
+                popup.innerHTML = `
+                    <h2>Alert Message Sent</h2>
+                    <p>Issue: ${message}</p>
+                    <button onclick="this.parentElement.remove()">OK</button>
+                `;
+                document.body.appendChild(popup);
+            }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -174,46 +259,53 @@
         });
     </script>
 </head>
+
 <body>
 
-<div class="header">
-    <h1>Emergency Response Coordination Platform - Report-Incident</h1>
-</div>
-
-<div class="navbar">
-    <a href="home.html">Home</a>
-    <a href="report-incident.html">Report-Incident</a>
-    <a href="emergency-alerts.html">Emergency-Alerts</a>
-    <a href="needs.html">Needs</a>
-    <a href="issues.html">Issues</a>
-    <a href="about.html">About Us</a>
-</div>
-
-<div class="content">
-    <div class="location-select">
-        <label for="locations">Select Location:</label>
-        <select id="locations" name="locations">
-            <option value="kompally">Kompally</option>
-            <option value="medchal">Medchal</option>
-            <option value="suchitra">Suchitra</option>
-        </select>
+    <div class="header">
+        <h1>Emergency Response Coordination Platform - Report-Incident</h1>
     </div>
 
-    <section>
-        <h2>Hospitals</h2>
-        <div id="hospitals"></div>
-    </section>
+    <div class="navbar">
+        <a href="home.html">Home</a>
+        <a href="report-incident.html">Report-Incident</a>
+        <a href="emergency-alerts.html">Emergency-Alerts</a>
+        <a href="needs.html">Needs</a>
+        <a href="FAQ.html">FAQ</a>
+        <a href="about.html">About Us</a>
+    </div>
 
-    <section>
-        <h2>Police Stations</h2>
-        <div id="police"></div>
-    </section>
+    <div class="content">
+        <div class="location-select">
+            <label for="locations">Select Location:</label>
+            <select id="locations" name="locations">
+                <option value="kompally">Kompally</option>
+                <option value="medchal">Medchal</option>
+                <option value="suchitra">Suchitra</option>
+                <option value="kukatpally">kukatpally</option>
+                <option value="secunderabad">Secunderabad</option>
+                <option value="pragathinagar">Pragathinagar</option>
+                <option value="uppal">Uppal</option>
 
-    <section>
-        <h2>Fire Engines</h2>
-        <div id="fire-engines"></div>
-    </section>
-</div>
+            </select>
+        </div>
+
+        <section>
+            <h2>Hospitals</h2>
+            <div id="hospitals"></div>
+        </section>
+
+        <section>
+            <h2>Police Stations</h2>
+            <div id="police"></div>
+        </section>
+
+        <section>
+            <h2>Fire Engines</h2>
+            <div id="fire-engines"></div>
+        </section>
+    </div>
 
 </body>
+
 </html>
