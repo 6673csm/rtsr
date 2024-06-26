@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report-Incident - Emergency Response Coordination Platform</title>
+    <title> Emergency Response Coordination Platform</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,18 +12,27 @@
             padding: 0;
             background-color: #f4f4f4;
         }
-
+        
         .header {
             background-color: #4CAF50;
             color: white;
             padding: 20px;
             text-align: center;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
         .header h1 {
-            margin: 0;
+            margin: 0 20px;
             font-size: 36px;
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            height: 50px;
+            margin-right: 20px;
         }
 
         .navbar {
@@ -103,8 +112,8 @@
         const data = {
             kompally: {
                 hospitals: [
-                    { name: "Kompally Hospital 1", number: "123-456-7890" },
-                    { name: "Kompally Hospital 2", number: "123-456-7891" }
+                    { name: "Premier Hospital", number: "123-456-7890" },
+                    { name: "Udai OMNI Hospital", number: "123-456-7891" }
                 ],
                 police: [
                     { name: "Kompally Police Station 1", number: "123-456-7892" },
@@ -117,8 +126,8 @@
             },
             medchal: {
                 hospitals: [
-                    { name: "Medchal Hospital 1", number: "223-456-7890" },
-                    { name: "Medchal Hospital 2", number: "223-456-7891" }
+                    { name: "KIMS Hospitals", number: "223-456-7890" },
+                    { name: "Medicover Hospitals", number: "223-456-7891" }
                 ],
                 police: [
                     { name: "Medchal Police Station 1", number: "223-456-7892" },
@@ -210,7 +219,6 @@
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
                     <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
-                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
 
@@ -218,7 +226,6 @@
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
                     <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
-                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
 
@@ -226,7 +233,6 @@
                 <div class="emergency-services">
                     <p>${service.name} - ${service.number}</p>
                     <button class="send-message-btn" onclick="sendMessage('${service.name}')">Send Message</button>
-                    <input type="text" class="message-input" placeholder="Enter issue">
                 </div>
             `).join('');
         }
@@ -243,7 +249,7 @@
                 popup.style.backgroundColor = '#fff';
                 popup.style.boxShadow = '0 0 10px rgba(0,0,0,0.5)';
                 popup.innerHTML = `
-                    <h2>Alert Message Sent</h2>
+                    <h2>Incident-Reported</h2>
                     <p>Issue: ${message}</p>
                     <button onclick="this.parentElement.remove()">OK</button>
                 `;
@@ -263,7 +269,8 @@
 <body>
 
     <div class="header">
-        <h1>Emergency Response Coordination Platform - Report-Incident</h1>
+        <img src="download.jpg" alt="Logo">
+        <h1>Emergency Response Coordination Platform </h1>
     </div>
 
     <div class="navbar">
@@ -271,8 +278,8 @@
         <a href="report-incident.html">Report-Incident</a>
         <a href="emergency-alerts.html">Emergency-Alerts</a>
         <a href="needs.html">Needs</a>
-        <a href="FAQ.html">FAQ</a>
         <a href="about.html">About Us</a>
+        <a href="FAQ.html">FAQ</a>
     </div>
 
     <div class="content">
